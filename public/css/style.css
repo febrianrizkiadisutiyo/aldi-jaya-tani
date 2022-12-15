@@ -1,0 +1,252 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+}
+.menu{
+    width: 150px;
+    height: 150px;
+    background-color: #fff;
+}
+/* Sidebar  */
+.wrapper{
+    display: flex;
+    transition: all 0.3s;
+} 
+#sidebar{
+    min-width: 250px;
+    max-width: 250px;
+    background: #198754;
+    position: fixed;
+    transition: all 0.3s;
+    height: 100vh;
+}
+#sidebar.active{
+    margin-left: -250px;
+}
+#sidebar .sidebar-header{
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #198754;
+}
+#sidebar .sidebar-header p{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
+#sidebar li  {
+    list-style-type: none;
+    margin: 16px;
+    margin-bottom: 20px;
+
+}
+#sidebar li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #fafafa;
+}
+
+
+
+ /*#sidebar ul.components{
+    padding: 20px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #44748b;
+}
+#sidebar ul li{
+    margin: 20px;
+    text-decoration: none;
+}
+#sidebar ul p{
+    color: #fff;
+    padding: 10px;
+}
+
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"]{
+    color: #fff;
+    background: #6d7fcc;
+}
+a[data-toggle="collapse"]{
+    position: relative;
+}
+.dropdown-toggle::after{
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translateY(-50%);
+}
+ul ul a{
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+} */
+
+#sidebar ul li a{
+   
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: 1.1em;
+}
+/*#sidebar ul li :hover{
+    color: #7386d5;
+    background: #fff;
+    color: #A4BE83;
+
+
+
+}*/
+/* .icon-header{
+    margin-bottom: 5px;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 100px;
+} */
+
+.description-header{
+    color: #fff;
+    margin-left: 40px;
+    font-size: 20px;
+}
+.item a {
+    text-decoration: none;
+}
+#content{
+    width: 100%;
+    padding: 20px;
+    margin-left:250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+#content.active{
+    margin-left: 0;
+}
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+        position: fixed;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+    #content{
+        width: 100%;
+        padding: 20px;
+        margin-left:25px;
+        min-height: 100vh;
+        transition: all 0.3s;
+    }
+    #content.active{
+        margin-left: 250px;
+    }
+    .menu{
+        height: 100px;
+        width: 100px;
+        background: #fff;
+    }
+    li {
+
+        height: 100px;
+        width: 100px;
+        background: #fff;
+        background-color: #FFF;
+    }
+}
+/* .icon{
+
+
+width: 20px;
+margin-right: 10px;
+} */
+/* .produk {
+    width: 25px;
+    margin-right: 6px;
+}
+.transaksi{
+    width: 25px;
+    margin-right: 5px;
+}
+.laporan{
+    width: 25px;
+    margin-right: 10px;
+} */
+
+
+
+
+/* .hover{
+    margin-left
+} */
+
+.hover:hover{
+    border-radius: 5px;
+    border-left-color: #434F3E ;
+    color: white;
+    width: 90%;
+    background: #434F3E;
+}
+
+.set-size{
+    color: #fff;
+    font-size: 18px;
+}
+
+#line {
+    margin-top: 0;
+    position: absolute;
+    margin-bottom: 0;
+width: 220px;
+height: 0px;
+left: 15px;
+top: 100px;
+
+border: 2px solid rgba(255, 251, 251, 0.5);
+}
+
+#which {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: 0.05em;
+    margin-left: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* .dropdown-toggle{
+    margin-left: 20px;
+} */
+ nav li:hover{
+    border-left-color:#D9D9D9 ;
+  
+ }
+ nav li{
+    border-left: 8px solid transparent;
+    padding: 5px;
+    width: 90%;
+    box-sizing: border-box;
+    border-radius: 3px;
+ }
+ ul{
+    padding-left: 0;
+    text-align: left;
+ }
+  
+
+
