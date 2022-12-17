@@ -77,7 +77,7 @@
                 <li>
                     <a href="#2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="bi bi-wallet2 mr-2"></i>
-                        Transaksi
+                        Kelola Produk
                     </a>
                     <ul class="collapse" id="2">
 
