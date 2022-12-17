@@ -17,7 +17,7 @@ class ProdukController extends Controller
     public function index( Request $request)
     {
         if($request->has('search')){
-            $produks = Produk::where('nama_produk','like','%' .$request->search.'%')->paginate();
+            $produks = Produk::where('nama_produk','like','%' .$request->search.'%')->paginate(5);
         } else {
             $produks = Produk::with('satuanProduk')->paginate(5);
         }

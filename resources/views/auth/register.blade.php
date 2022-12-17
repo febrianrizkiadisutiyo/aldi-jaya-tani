@@ -8,7 +8,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         
-                        <h1 style="text-align: center">Register</h1>
+                        <h1 style="text-align: center">Buat Akun Baru</h1>
                         
                         <div class="row mb-5 mt-3">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -53,7 +53,15 @@
                         <div class="row mb-5 mt-3">
 
                             <input id="" type="text" class="form-control" name="role"
-                                 autofocus placeholder="Roles">
+                                 autofocus placeholder="Role">
+
+                        </div>
+                        <div class="row mb-5 mt-3">
+
+                            <select  name="role">
+                                <option>pemilikToko</option>
+                                <option>karyawan</option>
+                             </select >
 
                         </div>
 
@@ -69,7 +77,7 @@
             </div>
         </div>
     </div>
-
+@endsection
     {{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -143,4 +151,3 @@
         </div>
     </div>
 </div> --}}
-@endsection

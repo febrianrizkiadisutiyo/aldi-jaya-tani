@@ -28,10 +28,14 @@ use GuzzleHttp\Middleware;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/coba', function () {
-    return view('coba');
-});
+// Route::get('/buatakun', function () {
+//     return view('auth.register');
+// });
+// Route::get('/coba', function () {
+//     return view('coba');
+// });
 Route::group(['middleware' => ['auth', 'hakakses:pemilikToko,karyawan']], function () {
+
     //crud Produk
     Route::get('/create_produk', [ProdukController::class, 'create']);
     Route::get('/produk', [ProdukController::class, 'index']);
@@ -69,6 +73,7 @@ Route::group(['middleware' => ['auth', 'hakakses:pemilikToko']], function () {
     Route::get('/laporanMasuk', [laporanMasukController::class, 'index']);
     Route::get('/cetaklaporanMasuk/{tgl_awal}/{tgl_akhir}', [laporanMasukController::class, 'cetakPertanggal']);
     Route::get('/excellaporanMasuk', [laporanMasukController::class, 'excel']);
+    // Route::get('/produkMasuk/ajax', [TransaksiController::class,'ajax']);
     //laporan Produk Keluar
     Route::get('/laporanKeluar', [laporanKeluarController::class, 'index']);
     Route::get('/cetaklaporanKeluar/{tgl_awal}/{tgl_akhir}', [laporanKeluarController::class, 'cetakPertanggal']);

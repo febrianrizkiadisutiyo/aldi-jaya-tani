@@ -43,13 +43,13 @@
                     @foreach ($produkKeluar as $pk)
                         <tr>
                             <th scope="row">{{ $pk->id }}</th>
-                            <td>{{ $pk->nama_produk }}</td>
-                            <td>{{ $pk->satuan_produk }}</td>
-                            <td>Rp.{{ $pk->harga_jual }}</td>
+                            <td>{{ $pk->Produk->nama_produk }}</td>
+                            <td>{{ $pk->Produk->satuanProduk->satuan_produk }}</td>
+                            <td>Rp.{{ $pk->Produk->harga_jual }}</td>
                             <td>{{ $pk->jumlah_keluar }}</td>
                             <td>{{ date('d F Y', strtotime($pk->tanggal_keluar)) }}</td>
                             {{-- <td>{{ $pk->created_at }}</td> --}}
-                            <td>Rp.{{ $pk->harga_jual * $pk->jumlah_keluar }}</td>
+                            <td>Rp.{{ $pk->Produk->harga_jual * $pk->jumlah_keluar }}</td>
                             {{-- <td>Rp.{{ ($pk->harga_jual - $pk->harga_beli) * $pk->jumlah_keluar }}</td> --}}
                             @if (auth()->user()->role == 'pemilikToko')
                             <td>
@@ -68,6 +68,9 @@
 
                 </tbody>
             </table>
+            <div class="pagination">
+                {{ $produkKeluar->links() }}
+            </div>
         </div>
     </div>
 @endsection

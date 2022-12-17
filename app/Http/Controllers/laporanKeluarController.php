@@ -20,23 +20,25 @@ class laporanKeluarController extends Controller
                                             ->join('produks','produks.id','=','produk_keluars.id_produk')
                                             ->join('satuan_produks','satuan_produks.id','=','produks.satuanProduk_id')
                                             ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
-                                            ->get();
+                                            ->paginate(5);
         } else {
-            $produkKeluar = ProdukKeluar::join('produks','produks.id','=','produk_keluars.id_produk')
-                                    ->join('satuan_produks','satuan_produks.id','=','produks.satuanProduk_id')
-                                    ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
-                                    ->get();
+            // $produkKeluar = ProdukKeluar::join('produks','produks.id','=','produk_keluars.id_produk')
+            //                         ->join('satuan_produks','satuan_produks.id','=','produks.satuanProduk_id')
+            //                         ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
+            //                         ->get();
+            $produkKeluar = ProdukKeluar::with('Produk')->paginate(5);
         }
         $produk = Produk::all();
         return view('laporan.laporanKeluar',compact('produk','produkKeluar'));
     }
     public function cetakPertanggal($tgl_awal, $tgl_akhir){
 
-        $cetakprodukKeluar = ProdukKeluar::join('produks','produks.id','=','produk_keluars.id_produk')
-                                    ->join('satuan_produks','satuan_produks.id','=','produks.satuanProduk_id')
-                                    ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
-                                    ->whereBetween('tanggal_keluar',[$tgl_awal, $tgl_akhir])
-                                    ->get();
+        // $cetakprodukKeluar = ProdukKeluar::join('produks','produks.id','=','produk_keluars.id_produk')
+        //                             ->join('satuan_produks','satuan_produks.id','=','produks.satuanProduk_id')
+        //                             ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
+        //                             ->whereBetween('tanggal_keluar',[$tgl_awal, $tgl_akhir])
+        //                             ->get();
+        $cetakprodukKeluar = ProdukKeluar::with('Produk')->get();
                             
         return view('laporan.cetaklaporanKeluar', compact('cetakprodukKeluar'));              
     }

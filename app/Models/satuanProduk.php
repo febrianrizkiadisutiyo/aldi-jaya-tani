@@ -15,4 +15,7 @@ class satuanProduk extends Model
     public function Produk(){
         return $this->hasMany(Produk::class);
     }
+    // public function satuanProduk(){
+    //     return $this->hasMany(satuanProduk::class);
+    // }
 }

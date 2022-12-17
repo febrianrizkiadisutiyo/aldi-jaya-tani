@@ -12,7 +12,7 @@
                     <div class="mb-3">
                         <div class="mb-3 mr-5">
                             <label for="nama_produk" class="form-label">Nama Produk</label>
-                            <select class="form-control select2" style="width: 100%;" name="id_produk" id="id_produk">
+                            <select class="form-control select2" style="width: 100%;" onchange="pilih()" name="id_produk" id="id_produk">
                                 <option>-- Pilih Produk --</option>
                                 @foreach ($produk as $p)
                                     <option value="{{ $p->id }}">{{ $p->nama_produk }}</option>
@@ -45,6 +45,22 @@
             </div>
         </div>
     </div>
+    @section('js')
+        <script type="text/javascript">
+            $function pilih(){
+                var id_produk = $("#id_produk").val();
+                $.ajax({
+                    type: "GET"
+                    url: "/produkMasuk/ajax",
+                    data: "id_produk=" + id_produk,
+                    success: function(data){
+                        $("#harga_beli").val(data.harga_beli);
+                    }
+                });
+            }
+        </script>
+    @endsection
+@endsection
     {{-- ajax --}}
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
@@ -62,4 +78,3 @@
                 });
             }
         </script> --}}
-@endsection

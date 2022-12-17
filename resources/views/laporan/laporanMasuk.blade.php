@@ -44,19 +44,22 @@
                     @foreach ($produkMasuk as $pm)
                         <tr>
                             <th scope="row">{{ $pm->id }}</th>
-                            <td>{{ $pm->nama_produk }}</td>
-                            <td>{{ $pm->satuan_produk }}</td>
-                            <td>Rp.{{ $pm->harga_beli }}</td>
+                            <td>{{ $pm->Produk->nama_produk }}</td>
+                            <td>{{ $pm->Produk->satuanProduk->satuan_produk }}</td>
+                            <td>Rp.{{ $pm->Produk->harga_beli }}</td>
                             <td>{{ $pm->jumlah_masuk }}</td>
                             <td>{{ date('d F Y', strtotime($pm->tanggal_masuk)) }}</td>
                             {{-- <td>{{ $pm->tanggal_masuk }}</td> --}}
                             {{-- <td>{{ showDateTime($pm->created_at,'d F Y') }}</td> --}}
-                            <td>Rp.{{ $pm->jumlah_masuk * $pm->harga_beli }}</td>
+                            <td>Rp.{{ $pm->jumlah_masuk * $pm->Produk->harga_beli }}</td>
                         </tr>
                     @endforeach
 
                 </tbody>
             </table>
+            <div class="pagination">
+                {{ $produkMasuk->links() }}
+            </div>
         </div>
     </div>
     {{-- modal pertanggal --}}

@@ -16,16 +16,24 @@ class ProdukMasukController extends Controller
     public function index(Request $request)
     {
         if($request->has('search')){
+            // $produkMasuk = ProdukMasuk::where('nama_produk','like','%' .$request->search. '%')
+            //             ->with('Produk')
+            //             ->get();
+            // $produkMasuk = ProdukMasuk::with('Produk')
+            //             ->where('nama_produk','like','%' .$request->search.'%')
+            //             ->get();
             $produkMasuk = ProdukMasuk::where('nama_produk','like','%' .$request->search.'%')
                             ->join('produks','produks.id','=','produk_masuks.id_produk')
                             ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
                             ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
                             ->get();
         }else{
-            $produkMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
-            ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
-            ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
-            ->get();
+            // $produkMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
+            // ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
+            // ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
+            // ->get();
+            $produkMasuk = ProdukMasuk::with('Produk')->paginate(5)
+        ;
         }
         $produk = Produk::all();               
         return view('produkMasuk.produkMasuk',compact('produk','produkMasuk'));
@@ -46,6 +54,12 @@ class ProdukMasukController extends Controller
     //     $ajax_produk = Produk::where('id',$id_produk)->get();
     //     return view('transaksi.ajax', compact('ajax_produk'));
     // }
+      // ajax
+      public function ajax( Request $request){
+        $id_produk['id_produk'] = $request->id_produk;
+        $ajax_produk = Produk::where('id',$id_produk)->get();
+        return view('produkMasuk.ajax', compact('ajax_produk'));
+    }
 
     /**
      * Store a newly created resource in storage.

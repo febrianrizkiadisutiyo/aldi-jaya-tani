@@ -45,8 +45,11 @@
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
+                <div class="text-center">
+                    <img src="logo aldi jaya tani.png" width="150px" height="150px"class="rounded-circle">
+                </div>
                 <p>Aldi Jaya Tani</p>
-            </div>
+            </div>      
             <div id="line"></div>
             <div id="which">Pilih Menu</div>
             <div class="list">
@@ -106,6 +109,15 @@
                         </li>
                     </ul>
                 </li>
+                {{-- <div class="btn-group dropup">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      Buat Akun
+                    </button>
+                    <ul class="dropdown-menu">
+                        
+                      <a href="/buatakun"><i class="bi bi-plus-lg"></i> akun</a>
+                    </ul>
+                  </div> --}}
                 @endif
             </div>
             {{-- <li>
@@ -209,6 +221,7 @@
             </nav>
             <br><br>
             @yield('content')
+            
         </div>
     </div>
 

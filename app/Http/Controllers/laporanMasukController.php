@@ -25,10 +25,11 @@ class laporanMasukController extends Controller
                             ->get();
                 
         } else {
-            $produkMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
-                        ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
-                        ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
-                        ->get();
+            // $produkMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
+            //             ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
+            //             ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
+            //             ->get();
+            $produkMasuk = ProdukMasuk::with('Produk')->paginate(5);
         }
         $produk = Produk::all();
         return view('laporan.laporanMasuk',compact('produk','produkMasuk'));
@@ -42,12 +43,14 @@ class laporanMasukController extends Controller
         //                 ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
         //                 ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.created_at')
         //                 ->whereBetween('created_at',[$tgl_awal, $tgl_akhir])
-        //                 ->get(); 
-        $cetakprodukMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
-        ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
-        ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
-        ->whereBetween('tanggal_masuk',[$tgl_awal, $tgl_akhir])
-        ->get();
+        //                 ->get();
+
+        // $cetakprodukMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
+        // ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
+        // ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
+        // ->whereBetween('tanggal_masuk',[$tgl_awal, $tgl_akhir])
+        // ->get();
+        $cetakprodukMasuk = ProdukMasuk::with('Produk')->get();
                             
         return view('laporan.cetaklaporanMasuk', compact('cetakprodukMasuk'));              
     }

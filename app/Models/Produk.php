@@ -20,4 +20,10 @@ class Produk extends Model
     // public function Transaksi(){
     //     return $this->hasMany(Transaksi::class);
     // }
+    public function produkMasuk(){
+        return $this->hasMany(produkMasuk::class);
+    }
+    public function produkKeluar(){
+        return $this->hasMany(produkKeluar::class);
+    }
 }
