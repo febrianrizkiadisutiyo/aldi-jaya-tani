@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\ProdukKeluar;
 use Illuminate\Http\Request;
+use App\Exports\laporanKeluarExcel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class laporanKeluarController extends Controller
 {
@@ -41,6 +43,9 @@ class laporanKeluarController extends Controller
         $cetakprodukKeluar = ProdukKeluar::with('Produk')->get();
                             
         return view('laporan.cetaklaporanKeluar', compact('cetakprodukKeluar'));              
+    }
+    public function excel(){
+        return Excel::download(new laporanKeluarExcel, 'laporan-produk-keluar.xlsx');
     }
 
     /**

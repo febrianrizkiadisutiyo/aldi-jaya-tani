@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth', 'hakakses:pemilikToko']], function () {
     //laporan Produk Keluar
     Route::get('/laporanKeluar', [laporanKeluarController::class, 'index']);
     Route::get('/cetaklaporanKeluar/{tgl_awal}/{tgl_akhir}', [laporanKeluarController::class, 'cetakPertanggal']);
+    Route::get('/excellaporanKeluar', [laporanKeluarController::class, 'excel']);
 
     //hapus produk masuk dan keluar
     Route::delete('/delete_produkMasuk/{id}', [ProdukMasukController::class, 'destroy']);

@@ -35,7 +35,7 @@ p{
     background: #198754;
 }
 #sidebar .sidebar-header p{
-    margin-top: 10px;
+    margin-top: 8px;
     font-size: 30px;
     color: white;
     text-align: center;
@@ -51,15 +51,15 @@ p{
     font-size: 20px;
     color: #fafafa;
 }
-/* .dropup{
-    margin-top: 190px;
+.dropup{
+    margin-top: 300px;
     margin-left: 8px;
 }
 .dropup ul a{
     text-decoration: none;
     color: black;
     font-weight: bold;
-} */
+}
 
 
 

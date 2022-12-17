@@ -12,6 +12,6 @@ class laporanMasukExcel implements FromCollection
     */
     public function collection()
     {
-        return ProdukMasuk::all();
+        return ProdukMasuk::with('Produk')->get();
     }
 }

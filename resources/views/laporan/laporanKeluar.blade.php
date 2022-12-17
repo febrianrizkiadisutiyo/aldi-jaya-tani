@@ -19,8 +19,8 @@
                 </form>
             </div>
             <div class="col-auto mt-3">
-                
-                <button type="button" class="btn btn-success"><i class="bi bi-file-earmark-excel"></i> Export Excel</button>
+                <a href="/excellaporanKeluar" type="button" class="btn btn-success"><i
+                        class="bi bi-file-earmark-excel"></i> Export Excel</a>
             </div>
             <div class="col-auto mt-3">
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cetak">

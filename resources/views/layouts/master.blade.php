@@ -49,7 +49,7 @@
                     <img src="logo aldi jaya tani.png" width="150px" height="150px"class="rounded-circle">
                 </div>
                 <p>Aldi Jaya Tani</p>
-            </div>      
+            </div>
             <div id="line"></div>
             <div id="which">Pilih Menu</div>
             <div class="list">
@@ -110,14 +110,14 @@
                     </ul>
                 </li>
                 {{-- <div class="btn-group dropup">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      Buat Akun
-                    </button>
-                    <ul class="dropdown-menu">
-                        
-                      <a href="/buatakun"><i class="bi bi-plus-lg"></i> akun</a>
-                    </ul>
-                  </div> --}}
+                   <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                     Buat Akun
+                   </button>
+                   <ul class="dropdown-menu">
+
+                     <a href="/buatakun"><i class="bi bi-plus-lg"></i> akun</a>
+                   </ul>
+                 </div> --}}
                 @endif
             </div>
             {{-- <li>
@@ -127,7 +127,7 @@
             <li class="">
                 <a href="#1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Produk</a>
                 <ul class="collapse" id="1">
-                    <li>                                                                                    
+                    <li>
                         <a href="coba">Jenis Produk</a>
                     </li>
                     <li>
@@ -136,26 +136,26 @@
                     <li>
                         <a href="/produk">Data Produk</a>
                     </li>
-                </ul>      
+                </ul>
             </li>
             <li>
                 <a href="#2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Transaksi</a>
                 <ul class="collapse" id="2">
-                    <li>                                                                                    
+                    <li>
                         <a href="#">Produk Masuk</a>
                     </li>
-                </ul>   
+                </ul>
             </li>
             <li>
                 <a href="#3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Laporan</a>
                 <ul class="collapse" id="3">
-                    <li>                                                                                    
+                    <li>
                         <a href="#">laporan Produk</a>
                     </li>
                     <li>
                         <a href="#">Laporan Transaksi</a>
                     </li>
-                </ul>   
+                </ul>
         </li>  --}}
         </nav>
         <div id="content">
@@ -199,15 +199,15 @@
 
                                     <div class="dropdown-menu dropdown-menu-end" >
                                         <h5 class="dropdown-item mb-3">{{ Auth::user()->role }}</h5>
-                                        
+
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             <button class="btn btn-success">
                                                 {{ __('Logout') }}
-                                            </button>                 
+                                            </button>
                                             </a>
-                                        
+
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             class="d-none">
                                             @csrf
@@ -221,7 +221,7 @@
             </nav>
             <br><br>
             @yield('content')
-            
+
         </div>
     </div>
 
