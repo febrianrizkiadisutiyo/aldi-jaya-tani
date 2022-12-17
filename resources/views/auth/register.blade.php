@@ -8,7 +8,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         
-                        <h1 style="text-align: center">Buat Akun Baru</h1>
+                        <h1 style="text-align: center">Register</h1>
                         
                         <div class="row mb-5 mt-3">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"

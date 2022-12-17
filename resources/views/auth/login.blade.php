@@ -37,13 +37,17 @@
                                 </button>
                                 <br>
 
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif 
+                                @endif  --}}
+                                <div class="text mt-3">
+                                    <h6>atau</h6>
+                                </div>
+                                
                                 @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Buat Akun') }}</a>
                                 @endif
                         </div>
                     </form>
