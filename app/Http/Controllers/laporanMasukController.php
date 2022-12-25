@@ -17,13 +17,12 @@ class laporanMasukController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('search')){
-                $produkMasuk = ProdukMasuk::where('nama_produk','like','%' .$request->search.'%')
-                            ->join('produks','produks.id','=','produk_masuks.id_produk')
-                            ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
-                            ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
-                            ->get();
-                
+        if ($request->has('search')) {
+            $produkMasuk = ProdukMasuk::where('nama_produk', 'like', '%' . $request->search . '%')
+                ->join('produks', 'produks.id', '=', 'produk_masuks.id_produk')
+                ->join('satuan_produks', 'satuan_produks.id', '=', 'produks.satuanProduk_id')
+                ->select('produk_masuks.*', 'produks.nama_produk', 'satuan_produks.satuan_produk', 'produks.harga_beli', 'produks.harga_jual', 'produks.stok', 'produk_masuks.jumlah_masuk', 'produk_masuks.tanggal_masuk')
+                ->paginate(5);
         } else {
             // $produkMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
             //             ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
@@ -31,13 +30,31 @@ class laporanMasukController extends Controller
             //             ->get();
             $produkMasuk = ProdukMasuk::with('Produk')->paginate(5);
         }
+
+        
         $produk = Produk::all();
-        return view('laporan.laporanMasuk',compact('produk','produkMasuk'));
+        
+        return view('laporan.laporanMasuk', compact('produk', 'produkMasuk'));
     }
-    public function excel(){
-        return Excel::download(new laporanMasukExcel, 'laporanProdukMasuk.xlsx');
+    public function excel()
+    {
+        return Excel::download(new laporanMasukExcel(), 'laporanProdukMasuk.xlsx');
     }
-    public function cetakPertanggal($tgl_awal, $tgl_akhir){
+    public function cetakPertanggal(Request $request)
+    {
+        $tgl_awal = $request->tgl_awal;
+        $tgl_akhir = $request->tgl_akhir;
+
+        if ($tgl_awal and $tgl_akhir) {
+            $cetakprodukMasuk = ProdukMasuk::with('Produk')
+                ->whereBetween('tanggal_masuk', [$tgl_awal, $tgl_akhir])
+                ->get();
+            // $sum_total = ProdukMasuk::whereBetween('tanggal_masuk', [$tgl_awal, $tgl_akhir])->sum('total');
+        } else {
+            $cetakprodukMasuk = ProdukMasuk::with('Produk');
+        }
+        return view('laporan.cetaklaporanMasuk', compact('cetakprodukMasuk','tgl_awal','tgl_akhir'));
+
         // dd(["tanggal awal : ".$tgl_awal, "Tanggal Akhir : ".$tgl_akhir]);
         // $cetakprodukMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
         //                 ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
@@ -50,9 +67,12 @@ class laporanMasukController extends Controller
         // ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
         // ->whereBetween('tanggal_masuk',[$tgl_awal, $tgl_akhir])
         // ->get();
-        $cetakprodukMasuk = ProdukMasuk::with('Produk')->get();
-                            
-        return view('laporan.cetaklaporanMasuk', compact('cetakprodukMasuk'));              
+
+        // $cetakprodukMasuk = ProdukMasuk::with('Produk')
+        // ->whereBetween('tanggal_masuk',[$tgl_awal, $tgl_akhir])
+        // ->get();
+
+        // return view('laporan.cetaklaporanMasuk', compact('cetakprodukMasuk'));
     }
 
     /**

@@ -1,42 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="container" style="margin-top: 170px">
-        <div class="row justify-content-center">
-            <div class="card text-center" style="width: 38rem;">
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <h1 style="text-align: center">Login</h1>
-                        <div class="row mb-5 mt-5">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>Maaf Terjadi Kesalahan, Coba Refresh atau Cek email yang anda inputkan</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="row mb-5">
-                            <input id="password" type="password"
-                                class="form-control @error('password') is-invalid @enderror" name="password" required
-                                autocomplete="current-password">
-
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="row mb-0">
+<div class="card-img-overlay" style="background-image: url(bg.png)">
+    <div class="card-body">
+        <div class="container" style="margin-top: 140px ">
+            <div class="row justify-content-center">
+                <div class="card text-center" style="width: 38rem;">
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <h1 style="text-align: center">Login</h1>
+                            <div class="row mb-5 mt-5">
+                                <input id="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    placeholder="Email" value="{{ old('email') }}" required autocomplete="email"
+                                    autofocus>
+    
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Maaf Terjadi Kesalahan, Coba Refresh atau Cek email yang anda
+                                            inputkan</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row mb-5">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required placeholder="Password" autocomplete="current-password">
+    
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+    
+                            <div class="row mb-0">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
                                 <br>
-
+    
                                 {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
@@ -45,20 +49,39 @@
                                 <div class="text mt-3">
                                     <h6>atau</h6>
                                 </div>
-                                
+    
                                 @if (Route::has('register'))
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Buat Akun') }}</a>
                                 @endif
-                        </div>
-                    </form>
-
+                            </div>
+                        </form>
+    
+                    </div>
                 </div>
             </div>
+    
         </div>
-
     </div>
+</div>
 
-    {{-- <div class="container">
+@endsection
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{-- <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card mt-5">
@@ -124,11 +147,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div> --}}
-@endsection
-
-{{-- <div class="row mb-3">
+        </div>--}}
+    {{-- <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

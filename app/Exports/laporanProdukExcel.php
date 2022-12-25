@@ -13,13 +13,12 @@ class laporanProdukExcel implements FromCollection
     */
     public function collection()
     {
-        $produk = Produk::with('satuanProduk')->get();
         // $satuanProduk = satuanProduk::get();
         // $produk = Produk::join('satuan_produks','satuan_produks.id','=','produks.satuanProduk_id')
         // ->select('satuan_produks.*','satuan_produks.satuan_produk')
         // ->get();
-        
+        $produk = Produk::with('satuanProduk')->get();
         return $produk;
-        
+      
     }
 }

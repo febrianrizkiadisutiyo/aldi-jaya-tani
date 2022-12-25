@@ -65,10 +65,15 @@ class satuanProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function edit($id)
+    // {
+    //     $satuanProduk = satuanProduk::find($id);
+    //     return view('crudSatuanProduk.editSatuan',['satuan_produks'=>$satuanProduk]);
+    // }
     public function edit($id)
     {
         $satuanProduk = satuanProduk::find($id);
-        return view('crudSatuanProduk.editSatuan',['satuan_produks'=>$satuanProduk]);
+        return view('crudSatuanProduk.satuanProduk',['satuan_produks'=>$satuanProduk]);
     }
 
     /**
@@ -95,6 +100,7 @@ class satuanProdukController extends Controller
     public function destroy($id)
     {
         $satuanProduk = satuanProduk::find($id);
+        $satuanProduk->Produk()->delete();
         $satuanProduk->delete();
         return redirect()->back()->with('status','berhasil terhapus');
     }

@@ -1,6 +1,7 @@
 body{
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    
 }
 p{
     font-family: 'Poppins', sans-serif;
@@ -31,11 +32,11 @@ p{
 }
 #sidebar .sidebar-header{
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 1px;
     background: #198754;
 }
 #sidebar .sidebar-header p{
-    margin-top: 8px;
+    /* margin-top: 1px; */
     font-size: 30px;
     color: white;
     text-align: center;
@@ -139,6 +140,12 @@ ul ul a{
 #content.active{
     margin-left: 0;
 }
+/* .bg{
+    background-image: url('logo aldi jaya tani.png');
+    background-color: #198754;
+} */
+    
+
 
 
 @media (max-width: 768px) {
@@ -221,7 +228,7 @@ margin-right: 10px;
     width: 220px;
     height: 0px;
     left: 15px;
-    top: 250px;
+    top: 230px;
 
 border: 2px solid rgba(255, 251, 251, 0.5);
 }

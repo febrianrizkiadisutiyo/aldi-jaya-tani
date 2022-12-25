@@ -13,7 +13,7 @@ class satuanProduk extends Model
     protected $fillable = ['satuan_produk'];
 
     public function Produk(){
-        return $this->hasMany(Produk::class);
+        return $this->hasMany(Produk::class,'satuanProduk_id','id');
     }
     // public function satuanProduk(){
     //     return $this->hasMany(satuanProduk::class);

@@ -31,7 +31,7 @@
             <table class="table border table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
+                        <th scope="col">Kode Produk Masuk</th>
                         <th scope="col">Nama_produk</th>
                         <th scope="col">Satuan_produk</th>
                         <th scope="col">Harga Beli</th>
@@ -41,19 +41,27 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php $total_harga = 0 @endphp
                     @foreach ($produkMasuk as $pm)
                         <tr>
-                            <th scope="row">{{ $pm->id }}</th>
+                            <th scope="row">{{ $pm->kode_pm }}</th>
                             <td>{{ $pm->Produk->nama_produk }}</td>
                             <td>{{ $pm->Produk->satuanProduk->satuan_produk }}</td>
-                            <td>Rp.{{ $pm->Produk->harga_beli }}</td>
+                            <td>Rp.{{ number_format($pm->Produk->harga_beli) }}</td>
                             <td>{{ $pm->jumlah_masuk }}</td>
                             <td>{{ date('d F Y', strtotime($pm->tanggal_masuk)) }}</td>
-                            {{-- <td>{{ $pm->tanggal_masuk }}</td> --}}
+                            {{-- <td>{{ $pm->total_harga }}</td> --}}
                             {{-- <td>{{ showDateTime($pm->created_at,'d F Y') }}</td> --}}
-                            <td>Rp.{{ $pm->jumlah_masuk * $pm->Produk->harga_beli }}</td>
+                            {{-- <td>Rp.{{ $pm->jumlah_masuk * $pm->Produk->harga_beli }}</td> --}}
+                            @php $total_harga = ($pm->jumlah_masuk * $pm->Produk->harga_beli)  @endphp
+                            <td>Rp.{{ number_format($total_harga)  }}</td>
+
+                            {{-- <td>Rp.{{ $pm->update(['total_harga' => $total_harga])  }}</td> --}}
                         </tr>
                     @endforeach
+                    <tr colspan="7">
+                        <td>Rp.{{ $total_harga }}</td>
+                    </tr>
 
                 </tbody>
             </table>

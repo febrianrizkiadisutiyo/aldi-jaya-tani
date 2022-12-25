@@ -9,10 +9,11 @@ class ProdukMasuk extends Model
 {
     use HasFactory;
 
-    protected $fillable =['id_produk','id_satuanProduk','jumlah_masuk','tanggal_masuk'];
+    protected $fillable =['id_produk','kode_pm','jumlah_masuk','tanggal_masuk','harga'];
     public function Produk(){
-        return $this->belongsTo(Produk::class,'id_produk');
+        return $this->belongsTo(Produk::class,'id_produk','id');
     }
+    
     // public function satuanProduk(){
     //     return $this->belongsTo(satuanProduk::class,'id_satuanProduk');
     // }

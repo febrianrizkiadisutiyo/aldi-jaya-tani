@@ -40,7 +40,9 @@ class laporanKeluarController extends Controller
         //                             ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
         //                             ->whereBetween('tanggal_keluar',[$tgl_awal, $tgl_akhir])
         //                             ->get();
-        $cetakprodukKeluar = ProdukKeluar::with('Produk')->get();
+        $cetakprodukKeluar = ProdukKeluar::with('Produk')
+        ->whereBetween('tanggal_keluar',[$tgl_awal, $tgl_akhir])
+        ->get();
                             
         return view('laporan.cetaklaporanKeluar', compact('cetakprodukKeluar'));              
     }

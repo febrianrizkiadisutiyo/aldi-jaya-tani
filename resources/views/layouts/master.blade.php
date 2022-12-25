@@ -46,7 +46,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <div class="text-center">
-                    <img src="logo aldi jaya tani.png" width="150px" height="150px"class="rounded-circle">
+                    <img src="logo_aldi_jaya_tani.png" width="150px" height="150px"class="rounded-circle">
                 </div>
                 <p>Aldi Jaya Tani</p>
             </div>
@@ -77,7 +77,7 @@
                 <li>
                     <a href="#2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="bi bi-wallet2 mr-2"></i>
-                        Kelola Produk
+                        Transaksi
                     </a>
                     <ul class="collapse" id="2">
 
@@ -92,7 +92,7 @@
                 </li>
                 @if (auth()->user()->role == 'pemilikToko')
                 <div id="which">Laporan</div>
-                <li>
+                <li class="overflow-auto" >
                     <a href="#3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="bi bi-clipboard-check mr-2"></i>
                         Laporan
@@ -247,7 +247,7 @@
                 $("#content").toggleClass('active')
             })
         })
-    </script>
+    </script>   
 
 </body>
 

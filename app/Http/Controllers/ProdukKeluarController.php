@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\ProdukKeluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdukKeluarController extends Controller
 {
@@ -20,6 +21,7 @@ class ProdukKeluarController extends Controller
                                             ->join('produks','produks.id','=','produk_keluars.id_produk')
                                             ->join('satuan_produks','satuan_produks.id','=','produks.satuanProduk_id')
                                             ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
+                                            ->latest()
                                             ->paginate(5);
         } else {
             // $produkKeluar = ProdukKeluar::join('produks','produks.id','=','produk_keluars.id_produk')
@@ -27,11 +29,21 @@ class ProdukKeluarController extends Controller
             //                         ->select('produk_keluars.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_keluars.jumlah_keluar','produk_keluars.tanggal_keluar')
             //                         ->get();
             $produkKeluar = ProdukKeluar::with('Produk')
+            ->latest()
             ->paginate(5);
         }
-        
+        $p = DB::table('produk_keluars')->select(DB::raw('MAX(RIGHT(kode_pk,4)) as kode'));
+        $kode = '';
+        if ($p->count() > 0) {
+            foreach ($p->get() as $k) {
+                $tmp = ((int) $k->kode) + 1;
+                $kode = sprintf('%04s', $tmp);
+            }
+        } else {
+            $kode = '0001';
+        }
         $produk = Produk::all();
-        return view('produkKeluar.produkKeluar',compact('produk','produkKeluar'));
+        return view('produkKeluar.produkKeluar',compact('produk','produkKeluar','kode'));
     }
 
     /**
@@ -53,13 +65,21 @@ class ProdukKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->all();
-        ProdukKeluar::create($requestData);
-
+        
         $produk = Produk::findOrFail($request->id_produk);
-        $produk->stok -= $request->jumlah_keluar;
-        $produk->save();
-        return redirect('/produkKeluar')->with('status','Produk Keluar Berhasil Ditambahkan');
+        if($produk->stok < $request->jumlah_keluar){
+            //  $this->session->set_flashdata('error','Jumlah Produk tidak Mencukupi');
+            return redirect('/produkKeluar')->with('status','Stok Tidak Mencukupi');      
+        } else {
+            $requestData = $request->all();
+            ProdukKeluar::create($requestData);
+            $produk->stok -= $request->jumlah_keluar;
+            $request->kode_pk;
+            $request->tanggal_keluar;
+            $produk->save();
+            return redirect('/produkKeluar')->with('status','Produk Keluar Berhasil Ditambahkan');
+        }
+        
 
     }
 

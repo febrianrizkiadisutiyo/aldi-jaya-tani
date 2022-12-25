@@ -7,7 +7,11 @@
     <div class="container">
         <h1>Tampilan Satuan Produk</h1>
         <br />
-        <a href="/create_satuan" type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Tambah Satuan Produk</a>
+        {{-- <a href="/create_satuan" type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Tambah Satuan Produk</a> --}}
+ <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createsatuan">
+            <i class="bi bi-plus-lg"></i> Tambah Satuan Produk
+        </button>
         <table class="table border table-hover mt-4">
             <thead>
                 <tr>
@@ -26,7 +30,10 @@
                             <form action="{{ url('delete_satuan/'. $satuanproduk->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <a href="{{ url('edit_satuan/'.$satuanproduk->id) }}" class="btn btn-warning" ><i class="bi bi-pen"></i> Edit</a>    
+                                {{-- <a href="{{ url('edit_satuan/'.$satuanproduk->id) }}" class="btn btn-warning" ><i class="bi bi-pen"></i> Edit</a> --}}
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editsatuan{{ $satuanproduk->id }}">
+                                    <i class="bi bi-pen"></i> Edit
+                                </button> 
                                 |
                                 <button type="submit" class="btn btn-danger"
                                     onclick="return confirm('Anda yakin Ingin Menghapus {{ $satuanproduk->satuan_produk }}')"><i class="bi bi-trash3"></i> Delete</button>
@@ -51,7 +58,7 @@
 {{-- buton ke modal 
 data-toggle="modal" data-target="#editsatuan" --}}
 
-{{-- <!-- Modal create satuan produk -->
+<!-- Modal create satuan produk -->
 <div class="modal" id="createsatuan">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
@@ -78,7 +85,8 @@ data-toggle="modal" data-target="#editsatuan" --}}
 </div>
 
 <!-- Modal edit satuan produk -->
-<div class="modal" id="editsatuan">
+@foreach ($satuan_produks as $satuanproduk)
+<div class="modal" id="editsatuan{{ $satuanproduk->id }}">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
 
@@ -102,5 +110,6 @@ data-toggle="modal" data-target="#editsatuan" --}}
             </div>
         </div>
     </div>
-</div> --}}
+</div>
+@endforeach
 @endsection

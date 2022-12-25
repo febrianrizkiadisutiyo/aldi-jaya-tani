@@ -55,13 +55,14 @@ Route::group(['middleware' => ['auth', 'hakakses:pemilikToko,karyawan']], functi
     Route::get('/produkMasuk', [ProdukMasukController::class, 'index']);
     Route::get('/create_produkMasuk', [ProdukMasukController::class, 'create']);
     Route::post('/store_produkMasuk', [ProdukMasukController::class, 'store']);
+    // Route::get('/ajax', [ProdukMasukController::class,'ajax']);
     //produk Keluar
     Route::get('/produkKeluar', [ProdukKeluarController::class, 'index']);
     Route::get('/create_produkKeluar', [ProdukKeluarController::class, 'create']);
     Route::post('/store_produkKeluar', [ProdukKeluarController::class, 'store']);
 });
 
-// Route::get('/produkMasuk/ajax', [ProdukMasukController::class,'ajax']);
+
 
 Route::group(['middleware' => ['auth', 'hakakses:pemilikToko']], function () {
     

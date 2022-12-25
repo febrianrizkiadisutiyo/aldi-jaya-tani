@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\ProdukMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdukMasukController extends Controller
 {
@@ -15,28 +16,39 @@ class ProdukMasukController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('search')){
+        if ($request->has('search')) {
             // $produkMasuk = ProdukMasuk::where('nama_produk','like','%' .$request->search. '%')
             //             ->with('Produk')
             //             ->get();
             // $produkMasuk = ProdukMasuk::with('Produk')
             //             ->where('nama_produk','like','%' .$request->search.'%')
             //             ->get();
-            $produkMasuk = ProdukMasuk::where('nama_produk','like','%' .$request->search.'%')
-                            ->join('produks','produks.id','=','produk_masuks.id_produk')
-                            ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
-                            ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
-                            ->get();
-        }else{
+            $produkMasuk = ProdukMasuk::where('nama_produk', 'like', '%' . $request->search . '%')
+                ->join('produks', 'produks.id', '=', 'produk_masuks.id_produk')
+                ->join('satuan_produks', 'satuan_produks.id', '=', 'produks.satuanProduk_id')
+                ->select('produk_masuks.*', 'produks.nama_produk', 'satuan_produks.satuan_produk', 'produks.harga_beli', 'produks.harga_jual', 'produks.stok', 'produk_masuks.jumlah_masuk', 'produk_masuks.tanggal_masuk', 'produk_masuks.harga_beli')
+                ->latest()
+                ->paginate(5);
+        } else {
             // $produkMasuk = ProdukMasuk::join('produks','produks.id','=','produk_masuks.id_produk')
             // ->join('satuan_produks','satuan_produks.id', '=', 'produks.satuanProduk_id')
             // ->select('produk_masuks.*','produks.nama_produk','satuan_produks.satuan_produk','produks.harga_beli','produks.harga_jual','produks.stok','produk_masuks.jumlah_masuk','produk_masuks.tanggal_masuk')
             // ->get();
-            $produkMasuk = ProdukMasuk::with('Produk')->paginate(5)
-        ;
+            $p = DB::table('produk_masuks')->select(DB::raw('MAX(RIGHT(kode_pm,4)) as kode'));
+            $kode = '';
+            if ($p->count() > 0) {
+                foreach ($p->get() as $k) {
+                    $tmp = ((int) $k->kode) + 1;
+                    $kode = sprintf('%04s', $tmp);
+                }
+            } else {
+                $kode = '0001';
+            }
+            $produkMasuk = ProdukMasuk::with('Produk')->latest()->paginate(5);
         }
-        $produk = Produk::all();               
-        return view('produkMasuk.produkMasuk',compact('produk','produkMasuk'));
+
+        $produk = Produk::all();
+        return view('produkMasuk.produkMasuk', compact('produk', 'produkMasuk','kode'));
     }
 
     /**
@@ -44,40 +56,47 @@ class ProdukMasukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $produk = Produk::all();
-        return view('produkMasuk.create_produkMasuk',compact('produk'));
-    }
+    // public function create()
+    // {
+    //     $produk = Produk::all();
+    //     return view('produkMasuk.create_produkMasuk',compact('produk'));
+    // }
     // public function ajax( Request $request){
     //     $id_produk['id_produk'] = $request->id_produk;
     //     $ajax_produk = Produk::where('id',$id_produk)->get();
     //     return view('transaksi.ajax', compact('ajax_produk'));
     // }
-      // ajax
-      public function ajax( Request $request){
-        $id_produk['id_produk'] = $request->id_produk;
-        $ajax_produk = Produk::where('id',$id_produk)->get();
-        return view('produkMasuk.ajax', compact('ajax_produk'));
-    }
+    // ajax
+    //   public function ajax( Request $request){
+    //     $id_produk['id_produk'] = $request->id_produk;
+    //     $ajax_produk = Produk::where('id',$id_produk)->get();
+    //     return view('produkMasuk.ajax', compact('ajax_produk'));
+    //     $nama_produk['nama_produk'] = $request->id_produk;
+    //     $ajax_produk = Produk::where('id',$nama_produk)->get();
+    //     return view('produkMasuk.produkMasuk', compact('ajax_produk'));
+    // }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_produk)
     {
-       
+        
         $requestData = $request->all();
         ProdukMasuk::create($requestData);
         $produk = Produk::findOrFail($request->id_produk);
         $produk->stok += $request->jumlah_masuk;
+        $request->kode_pm;      
+        // $produk->harga_beli = $request->harga;
+        // $request->total_harga = $request->jumlah_masuk * $produk->harga_beli;
         $request->tanggal_masuk;
         $produk->save();
-        return redirect('/produkMasuk')->with('status','Berhasil menambahkan Produk Masuk');
 
+        return redirect('/produkMasuk')->with('status', 'Berhasil menambahkan Produk Masuk');
     }
 
     /**
@@ -124,6 +143,8 @@ class ProdukMasukController extends Controller
     {
         $produkMasuk = ProdukMasuk::find($id);
         $produkMasuk->delete();
-        return redirect()->back()->with('status','berhasil terhapus');
+        return redirect()
+            ->back()
+            ->with('status', 'berhasil terhapus');
     }
 }

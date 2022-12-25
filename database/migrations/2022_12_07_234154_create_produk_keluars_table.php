@@ -16,6 +16,7 @@ class CreateProdukKeluarsTable extends Migration
         Schema::create('produk_keluars', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('id_produk');
+            $table->string('kode_pk')->unique();
             $table->integer('jumlah_keluar');
             $table->date('tanggal_keluar');
             $table->timestamps();

@@ -16,8 +16,11 @@ class CreateProdukMasuksTable extends Migration
         Schema::create('produk_masuks', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('id_produk');
+            $table->string('kode_pm')->unique();
             $table->integer('jumlah_masuk');
             $table->date('tanggal_masuk');
+            $table->integer('harga')->default(0);
+            $table->integer('total_harga')->default(0);
             $table->timestamps();
         });
     }

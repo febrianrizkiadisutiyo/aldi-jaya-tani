@@ -30,7 +30,7 @@
             <table class="table border table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
+                        <th scope="col">Kode Produk</th>
                         <th scope="col">Nama Produk</th>
                         <th scope="col">Satuan Produk</th>
                         <th scope="col">Harga Beli</th>
@@ -42,11 +42,11 @@
                 <tbody>
                     @foreach ($produks as $produk)
                         <tr>
-                            <th scope="row">{{ $produk->id }}</th>
+                            <th>{{ $produk->kode_produk }}</th>
                             <td>{{ $produk->nama_produk }}</td>
                             <td>{{ $produk->satuanProduk->satuan_produk }}</td>
-                            <td>Rp.{{ $produk->harga_beli }}</td>
-                            <td>Rp.{{ $produk->harga_jual }}</td>
+                            <td>Rp.{{ number_format($produk->harga_beli)  }}</td>
+                            <td>Rp.{{ number_format($produk->harga_jual) }}</td>
                             <td>{{ $produk->stok }}</td>
                         </tr>
                     @endforeach
