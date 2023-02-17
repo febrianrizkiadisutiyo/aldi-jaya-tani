@@ -18,9 +18,9 @@
                         <input type="search" input="latin-name" name="search" class="form-control">
                     </form>
                 </div>
-                <div class="col-auto mt-3">
+                {{-- <div class="col-auto mt-3">
                     <a href="/excellaporanProduk" type="button" class="btn btn-success"><i class="bi bi-file-earmark-excel"></i> Export Excel</a>
-                </div>
+                </div> --}}
                 <div class="col-auto mt-3">
                     <a href="/cetaklaporanProduk" type="button" target="_blank" class="btn btn-danger"><i class="bi bi-printer"></i> Cetak Data</a>
                 </div>

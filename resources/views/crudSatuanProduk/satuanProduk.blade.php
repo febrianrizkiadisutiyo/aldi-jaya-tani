@@ -1,8 +1,6 @@
 @extends('layouts.master')
 @section('content')
-@if (session('status'))
-<h6 class="alert alert-success">{{ session('status') }}</h6>
-@endif
+@include('sweetalert::alert')
 <div class="card-body shadow-lg">
     <div class="container">
         <h1>Tampilan Satuan Produk</h1>
@@ -21,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($satuan_produks as $satuanproduk)
+                @foreach ($satuanProduk as $satuanproduk)
                     <tr>
                         <th scope="row">{{ $satuanproduk->id }}</th>
                         <td>{{ $satuanproduk->satuan_produk }}</td>
@@ -85,7 +83,7 @@ data-toggle="modal" data-target="#editsatuan" --}}
 </div>
 
 <!-- Modal edit satuan produk -->
-@foreach ($satuan_produks as $satuanproduk)
+@foreach ($satuanProduk as $satuanproduk)
 <div class="modal" id="editsatuan{{ $satuanproduk->id }}">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">

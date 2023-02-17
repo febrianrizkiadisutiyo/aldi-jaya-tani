@@ -5,7 +5,7 @@
             @if (session('status'))
                 <h6 class="alert alert-success">{{ session('status') }}</h6>
             @endif
-            <h1>laporan Produk Masuk</h1>
+            <h1>Laporan Produk Masuk</h1>
             <br />
             <br />
             <div class="row g-3">
@@ -17,10 +17,10 @@
                         <input type="search" input="latin-name" name="search" class="form-control">
                     </form>
                 </div>
-                <div class="col-auto mt-3">
+                {{-- <div class="col-auto mt-3">
                     <a href="/excellaporanMasuk" type="button" class="btn btn-success"><i
                             class="bi bi-file-earmark-excel"></i> Export Excel</a>
-                </div>
+                </div> --}}
                 <div class="col-auto mt-3">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cetak">
                         <i class="bi bi-printer"></i> Cetak Data
@@ -32,8 +32,8 @@
                 <thead>
                     <tr>
                         <th scope="col">Kode Produk Masuk</th>
-                        <th scope="col">Nama_produk</th>
-                        <th scope="col">Satuan_produk</th>
+                        <th scope="col">Nama Produk</th>
+                        <th scope="col">Satuan Produk</th>
                         <th scope="col">Harga Beli</th>
                         <th scope="col">Jumlah Masuk</th>
                         <th scope="col">Tanggal Masuk</th>
@@ -41,27 +41,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $total_harga = 0 @endphp
+                    {{-- @php
+                        $total_harga = 0;
+                        $total = 0;
+                    @endphp --}}
                     @foreach ($produkMasuk as $pm)
                         <tr>
                             <th scope="row">{{ $pm->kode_pm }}</th>
                             <td>{{ $pm->Produk->nama_produk }}</td>
                             <td>{{ $pm->Produk->satuanProduk->satuan_produk }}</td>
-                            <td>Rp.{{ number_format($pm->Produk->harga_beli) }}</td>
+                            <td>Rp.{{ number_format($pm->harga) }}</td>
                             <td>{{ $pm->jumlah_masuk }}</td>
                             <td>{{ date('d F Y', strtotime($pm->tanggal_masuk)) }}</td>
+                            <td>Rp.{{ number_format($pm->total_harga) }}</td>
                             {{-- <td>{{ $pm->total_harga }}</td> --}}
                             {{-- <td>{{ showDateTime($pm->created_at,'d F Y') }}</td> --}}
                             {{-- <td>Rp.{{ $pm->jumlah_masuk * $pm->Produk->harga_beli }}</td> --}}
-                            @php $total_harga = ($pm->jumlah_masuk * $pm->Produk->harga_beli)  @endphp
-                            <td>Rp.{{ number_format($total_harga)  }}</td>
-
+                            {{-- @php
+                                $total_harga = $pm->jumlah_masuk * $pm->Produk->harga_beli;
+                                $total += $total_harga;
+                            @endphp   --}}
+                           
+                            
                             {{-- <td>Rp.{{ $pm->update(['total_harga' => $total_harga])  }}</td> --}}
                         </tr>
                     @endforeach
-                    <tr colspan="7">
-                        <td>Rp.{{ $total_harga }}</td>
-                    </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                            <th>Total :</th>
+                            <th>Rp.{{ number_format($total) }}</th>
+                        </tr>
+                        
+                    {{-- <tr colspan="7">
+                        @php $total = sum($total_harga) @endphp
+                        <td>Rp.{{ number_format($total) }}</td>
+                    </tr> --}}
 
                 </tbody>
             </table>
@@ -78,7 +92,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h1 class="modal-title">Tambah Data Produk</h1>
+                    <h2 class="modal-title">Cetak Berdasarkan Tanggal</h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="bi bi-x"></i></button>
                 </div>
 

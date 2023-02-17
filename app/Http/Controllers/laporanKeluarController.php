@@ -30,8 +30,10 @@ class laporanKeluarController extends Controller
             //                         ->get();
             $produkKeluar = ProdukKeluar::with('Produk')->paginate(5);
         }
+        $total = ProdukKeluar::sum('total_harga');
+        $totalPendapatan = ProdukKeluar::sum('pendapatan');
         $produk = Produk::all();
-        return view('laporan.laporanKeluar',compact('produk','produkKeluar'));
+        return view('laporan.laporanKeluar',compact('produk','produkKeluar','total','totalPendapatan'));
     }
     public function cetakPertanggal($tgl_awal, $tgl_akhir){
 
@@ -43,7 +45,7 @@ class laporanKeluarController extends Controller
         $cetakprodukKeluar = ProdukKeluar::with('Produk')
         ->whereBetween('tanggal_keluar',[$tgl_awal, $tgl_akhir])
         ->get();
-                            
+        // $totalPendapatan = ProdukKeluar::sum('pendapatan',[$tgl_awal, $tgl_akhir]);      
         return view('laporan.cetaklaporanKeluar', compact('cetakprodukKeluar'));              
     }
     public function excel(){

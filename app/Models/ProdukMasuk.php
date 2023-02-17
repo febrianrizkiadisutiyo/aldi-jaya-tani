@@ -14,6 +14,9 @@ class ProdukMasuk extends Model
         return $this->belongsTo(Produk::class,'id_produk','id');
     }
     
+    // public function ProdukKeluar(){
+    //     return $this->hasMany(ProdukKeluar::class, 'id_prodMasuk','id');
+    // }
     // public function satuanProduk(){
     //     return $this->belongsTo(satuanProduk::class,'id_satuanProduk');
     // }

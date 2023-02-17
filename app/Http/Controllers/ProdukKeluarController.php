@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\ProdukKeluar;
+use App\Models\ProdukMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +33,7 @@ class ProdukKeluarController extends Controller
             ->latest()
             ->paginate(5);
         }
+
         $p = DB::table('produk_keluars')->select(DB::raw('MAX(RIGHT(kode_pk,4)) as kode'));
         $kode = '';
         if ($p->count() > 0) {
@@ -67,17 +69,22 @@ class ProdukKeluarController extends Controller
     {
         
         $produk = Produk::findOrFail($request->id_produk);
+        // $prodMasuk = ProdukMasuk::findOrFail($request->id);
         if($produk->stok < $request->jumlah_keluar){
             //  $this->session->set_flashdata('error','Jumlah Produk tidak Mencukupi');
             return redirect('/produkKeluar')->with('status','Stok Tidak Mencukupi');      
         } else {
             $requestData = $request->all();
-            ProdukKeluar::create($requestData);
+            // $prodMasuk = ProdukMasuk::create('harga');
+            $prodKeluar = ProdukKeluar::create($requestData);
             $produk->stok -= $request->jumlah_keluar;
-            $request->kode_pk;
-            $request->tanggal_keluar;
+            $prodKeluar->harga = $produk->harga_jual;
+            $prodKeluar->total_harga = $request->jumlah_keluar * $prodKeluar->harga;
+            $prodKeluar->pendapatan = ($prodKeluar->harga - $produk->harga_beli) * $request->jumlah_keluar;
+            // $prodMasuk->save();
+            $prodKeluar->save();
             $produk->save();
-            return redirect('/produkKeluar')->with('status','Produk Keluar Berhasil Ditambahkan');
+            return redirect('/produkKeluar')->with('success','Produk Keluar Berhasil Ditambahkan');
         }
         
 
@@ -127,6 +134,6 @@ class ProdukKeluarController extends Controller
     {
         $produkKeluar = ProdukKeluar::find($id);
         $produkKeluar->delete();
-        return redirect()->back()->with('status','berhasil terhapus');
+        return redirect()->back()->with('success','berhasil terhapus');
     }
 }

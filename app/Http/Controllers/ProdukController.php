@@ -42,22 +42,22 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        // $produk = Produk::all();
-        $q = DB::table('produks')->select(DB::raw('MAX(RIGHT(id,4)) as kode'));
-        $kd = "";
-        if($q->count()>0){
-            foreach($q->get() as $k){
-                $tmp = ((int)$k->kode)+1;
-                $kd = sprintf("%04s",$tmp);
-            }
-        } else {
-            $kd = "0001";
-        }
-        $satuanProduk = satuanProduk::all();
-        return view('crudProduk.dataProduk',compact('satuanProduk','produk','kd'));
-    }
+    // public function create()
+    // {
+    //     // $produk = Produk::all();
+    //     $q = DB::table('produks')->select(DB::raw('MAX(RIGHT(id,4)) as kode'));
+    //     $kd = "";
+    //     if($q->count()>0){
+    //         foreach($q->get() as $k){
+    //             $tmp = ((int)$k->kode)+1;
+    //             $kd = sprintf("%04s",$tmp);
+    //         }
+    //     } else {
+    //         $kd = "0001";
+    //     }
+    //     $satuanProduk = satuanProduk::all();
+    //     return view('crudProduk.dataProduk',compact('satuanProduk','produk','kd'));
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -67,16 +67,6 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {   
-        // $requestData = $request->all();
-        // Produk::create($requestData);
-        // $produkM = ProdukMasuk::findOrFail($request->id);
-        // $request->harga_beli = $produkM->harga;
-        // $request->nama_produk;
-        // $request->satuanProduk_id;
-        // $request->harga_jual;
-        // $produkM->save();
-        // return redirect('/produk')->with('status','Berhasil menambahkan Produk');
-
         $this->validate($request, [
             'kode_produk' => 'required',
             'nama_produk' => 'required',
@@ -92,13 +82,8 @@ class ProdukController extends Controller
             'harga_beli' => $request->harga_beli,
             'harga_jual' =>$request->harga_jual,
         ]);
-        // ProdukMasuk::create([
-            
-        //     // 'harga' => $produk->harga_beli,
-            
-        // ]);
         
-        return redirect('/produk')->with('status','Berhasil menambahkan data Produk');
+        return redirect('/produk')->with('success', 'Data Produk Berhasil Tersimpan');
     }
 
     /**
@@ -150,7 +135,7 @@ class ProdukController extends Controller
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
         $produk->update();
-        return redirect('/produk')->with('status','Berhasil mengedit data produk');
+        return redirect('/produk')->with('success','Berhasil mengedit data produk');
     }
 
     /**
@@ -165,6 +150,6 @@ class ProdukController extends Controller
             $produk->ProdukMasuk()->delete();
             $produk->ProdukKeluar()->delete();
             $produk->delete();
-            return redirect()->back()->with('status','berhasil terhapus');
+            return redirect()->back()->with('success','berhasil terhapus');
     }
 }

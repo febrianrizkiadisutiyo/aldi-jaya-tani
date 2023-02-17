@@ -1,9 +1,10 @@
     @extends('layouts.master')
 
     @section('content')
-        @if (session('status'))
+        @include('sweetalert::alert')
+        {{-- @if (session('status'))
             <h6 class="alert alert-success">{{ session('status') }}</h6>
-        @endif
+        @endif --}}
         <div class="card-body shadow-lg">
             <div class="container">
                 <h1>Tampilan Data Produk</h1>
@@ -11,11 +12,11 @@
                 <div class="row g-3">
                     <div class="col">
                                 <!-- Button to Open the Modal -->
-                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcreate">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcreate">
                             <i class="bi bi-plus-lg"></i>  Tambah Produk Baru
-                        </button> --}}
-                        <a href="/create_produk" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcreate"><i class="bi bi-plus-lg"></i> Tambah
-                            Produk Baru</a>
+                        </button>
+                        {{-- <a href="/create_produk" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcreate"><i class="bi bi-plus-lg"></i> Tambah
+                            Produk Baru</a> --}}
                     </div>
                     <div class="col-auto mt-4">
                         <label for=""><b>Search</b></label>
@@ -160,6 +161,7 @@
                                     value="{{ $produk->nama_produk }}">
                             </div>
                             <div class="form-group">
+                                <label class="form-label">Satuan Produk</label>
                                 <select class="form-control select2" style="width: 100%;" name="satuanProduk_id" id="satuanProduk_id">
                                     {{-- <option value="{{ $produk->satuanProduk_id }}">{{ $produk->satuanProduk->satuan_produk }}</option> --}}
                                     <option disabled value>-- Pilih Satuan Produk --</option>

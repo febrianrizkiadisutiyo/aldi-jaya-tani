@@ -15,7 +15,7 @@ class satuanProdukController extends Controller
     public function index()
     {
         $satuanProduk = satuanProduk::all();
-        return view('crudSatuanProduk.satuanProduk',['satuan_produks' =>$satuanProduk]);
+        return view('crudSatuanProduk.satuanProduk', compact('satuanProduk'));
     }
 
     /**
@@ -23,12 +23,12 @@ class satuanProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('crudSatuanProduk.createSatuan');
-        // $satuanProduk = satuanProduk::all();
-        // return view('crudProduk.dataProduk',compact('satuanProduk'));
-    }
+    // public function create()
+    // {
+    //     return view('crudSatuanProduk.createSatuan');
+    //     // $satuanProduk = satuanProduk::all();
+    //     // return view('crudProduk.dataProduk',compact('satuanProduk'));
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +45,7 @@ class satuanProdukController extends Controller
             'satuan_produk' =>$request->satuan_produk,
         ]);
         // return redirect()->back()->with('status','student added Successfully');
-        return redirect('/satuanProduk')->with('status','Berhasil menambahkan satuan Produk');
+        return redirect('/satuanProduk')->with('success','Berhasil menambahkan satuan Produk');
     }
 
     /**

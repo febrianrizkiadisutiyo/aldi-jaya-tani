@@ -3,15 +3,15 @@
 @section('content')
 <div class="card-img-overlay" style="background-image: url(bg.png)">
     <div class="card-body">
-        <div class="container" style="margin-top: 120px">
+        <div class="container" style="margin-top: 100px">
             <div class="row justify-content-center">
-                <div class="card text-center" style="width: 38rem;">
+                <div class="card text-center" style="width: 38rem; border-radius: 20px">
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             
-                            <h1 style="text-align: center">Register</h1>
-                            
+                            <h1 style="text-align: center">Silahkan Buat Akun</h1>
+                            <h6><br/></h6>
                             <div class="row mb-5 mt-3">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
@@ -70,11 +70,12 @@
                             <div class="row mb-0">
     
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Buat Akun') }}
                                 </button>
-    
                             </div>
+                            <h4><br/></h4>
                         </form>
+                        
                     </div>
                 </div>
             </div>

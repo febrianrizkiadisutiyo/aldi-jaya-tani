@@ -17,10 +17,10 @@
                         <input type="search" input="latin-name" name="search" class="form-control">
                     </form>
                 </div>
-                <div class="col-auto mt-3">
+                {{-- <div class="col-auto mt-3">
                     <a href="/excellaporanKeluar" type="button" class="btn btn-success"><i
                             class="bi bi-file-earmark-excel"></i> Export Excel</a>
-                </div>
+                </div> --}}
                 <div class="col-auto mt-3">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cetak">
                         <i class="bi bi-printer"></i> Cetak Data
@@ -32,13 +32,13 @@
                 <thead>
                     <tr>
                         <th scope="col">Kode Produk Keluar</th>
-                        <th scope="col">Nama_produk</th>
-                        <th scope="col">Satuan_produk</th>
+                        <th scope="col">Nama Produk</th>
+                        <th scope="col">Satuan Produk</th>
                         <th scope="col">Harga Jual</th>
                         <th scope="col">Jumlah Keluar</th>
                         <th scope="col">Tanggal Keluar</th>
                         <th scope="col">Total Harga</th>
-                        <th scope="col">Keuntungan</th>
+                        <th scope="col">Pendapatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,15 +47,21 @@
                             <th scope="row">{{ $pk->kode_pk }}</th>
                             <td>{{ $pk->Produk->nama_produk }}</td>
                             <td>{{ $pk->Produk->satuanProduk->satuan_produk }}</td>
-                            <td>Rp.{{ number_format($pk->Produk->harga_jual) }}</td>
+                            <td>Rp.{{ number_format($pk->harga) }}</td>
                             <td>{{ $pk->jumlah_keluar }}</td>
                             <td>{{ date('d F Y', strtotime($pk->tanggal_keluar)) }}</td>
                             {{-- <td>{{ $pk->created_at }}</td> --}}
-                            <td>Rp.{{ number_format($pk->Produk->harga_jual * $pk->jumlah_keluar) }}</td>
-                            <td>Rp.{{ number_format(($pk->Produk->harga_jual - $pk->Produk->harga_beli) * $pk->jumlah_keluar) }}
+                            <td>Rp.{{ number_format($pk->total_harga) }}</td>
+                            <td>Rp.{{ number_format($pk->pendapatan) }}</td>
+                            {{-- <td>Rp.{{ number_format(($pk->Produk->harga_jual - $pk->Produk->harga_beli) * $pk->jumlah_keluar) }} --}}
                         </tr>
                     @endforeach
-
+                    <tr>
+                        <td colspan="5"></td>
+                        <th>Total :</th>
+                        <th>Rp.{{ number_format($total) }}</th>
+                        <th>Rp.{{ number_format($totalPendapatan) }}</th>
+                    </tr>
                 </tbody>
             </table>
             <div class="pagination">
@@ -72,7 +78,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h1 class="modal-title">Tambah Data Produk</h1>
+                    <h2 class="modal-title">Cetak Berdasarkan Tanggal</h2>
                     <button type="button" class="close" data-dismiss="modal"><i class="bi bi-x"></i></button>
                 </div>
 

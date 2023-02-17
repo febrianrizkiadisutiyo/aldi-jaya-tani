@@ -37,7 +37,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth', 'hakakses:pemilikToko,karyawan']], function () {
 
     //crud Produk
-    Route::get('/create_produk', [ProdukController::class, 'create']);
+    // Route::get('/create_produk', [ProdukController::class, 'create']);
     Route::get('/produk', [ProdukController::class, 'index']);
     Route::post('/store_produk', [ProdukController::class, 'store']);
     Route::get('/edit_produk/{id}', [ProdukController::class, 'edit']);
@@ -46,19 +46,19 @@ Route::group(['middleware' => ['auth', 'hakakses:pemilikToko,karyawan']], functi
 
     //crud satuanProduk
     Route::get('/satuanProduk', [satuanProdukController::class, 'index']);
-    Route::get('/create_satuan', [satuanProdukController::class, 'create']);
+    // Route::get('/create_satuan', [satuanProdukController::class, 'create']);
     Route::post('/store_satuan', [satuanProdukController::class, 'store']);
     Route::get('/edit_satuan/{id}', [satuanProdukController::class, 'edit']);
     Route::put('/update_satuan/{id}', [satuanProdukController::class, 'update']);
     Route::delete('/delete_satuan/{id}', [satuanProdukController::class, 'destroy']);
     //produk Masuk
     Route::get('/produkMasuk', [ProdukMasukController::class, 'index']);
-    Route::get('/create_produkMasuk', [ProdukMasukController::class, 'create']);
+    // Route::get('/create_produkMasuk', [ProdukMasukController::class, 'create']);
     Route::post('/store_produkMasuk', [ProdukMasukController::class, 'store']);
     // Route::get('/ajax', [ProdukMasukController::class,'ajax']);
     //produk Keluar
     Route::get('/produkKeluar', [ProdukKeluarController::class, 'index']);
-    Route::get('/create_produkKeluar', [ProdukKeluarController::class, 'create']);
+    // Route::get('/create_produkKeluar', [ProdukKeluarController::class, 'create']);
     Route::post('/store_produkKeluar', [ProdukKeluarController::class, 'store']);
 });
 

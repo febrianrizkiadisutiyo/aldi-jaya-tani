@@ -64,41 +64,6 @@ p{
 
 
 
- /*#sidebar ul.components{
-    padding: 20px 0;
-    text-decoration: none;
-    border-bottom: 1px solid #44748b;
-}
-#sidebar ul li{
-    margin: 20px;
-    text-decoration: none;
-}
-#sidebar ul p{
-    color: #fff;
-    padding: 10px;
-}
-
-
-#sidebar ul li.active>a,
-a[aria-expanded="true"]{
-    color: #fff;
-    background: #6d7fcc;
-}
-a[data-toggle="collapse"]{
-    position: relative;
-}
-.dropdown-toggle::after{
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20%;
-    transform: translateY(-50%);
-}
-ul ul a{
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
-} */
 
 #sidebar ul li a{
    
@@ -106,21 +71,7 @@ ul ul a{
     padding: 5px;
     font-size: 1.1em;
 }
-/*#sidebar ul li :hover{
-    color: #7386d5;
-    background: #fff;
-    color: #A4BE83;
 
-
-
-}*/
-/* .icon-header{
-    margin-bottom: 5px;
-    display: flex;
-    margin-top: 20px;
-    margin-left: 50px;
-    width: 100px;
-} */
 
 .description-header{
     color: #fff;
@@ -140,10 +91,7 @@ ul ul a{
 #content.active{
     margin-left: 0;
 }
-/* .bg{
-    background-image: url('logo aldi jaya tani.png');
-    background-color: #198754;
-} */
+
     
 
 
@@ -182,31 +130,7 @@ ul ul a{
         background-color: #FFF;
     }
 }
-/* .icon{
 
-
-width: 20px;
-margin-right: 10px;
-} */
-/* .produk {
-    width: 25px;
-    margin-right: 6px;
-}
-.transaksi{
-    width: 25px;
-    margin-right: 5px;
-}
-.laporan{
-    width: 25px;
-    margin-right: 10px;
-} */
-
-
-
-
-/* .hover{
-    margin-left
-} */
 
 .hover:hover{
     border-radius: 5px;
@@ -246,9 +170,7 @@ border: 2px solid rgba(255, 251, 251, 0.5);
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* .dropdown-toggle{
-    margin-left: 20px;
-} */
+
  nav li:hover{
     border-left-color:#D9D9D9 ;
   
@@ -265,5 +187,84 @@ border: 2px solid rgba(255, 251, 251, 0.5);
     text-align: left;
  }
   
+ /*#sidebar ul li :hover{
+    color: #7386d5;
+    background: #fff;
+    color: #A4BE83;
+
+
+
+}*/
+/* .icon-header{
+    margin-bottom: 5px;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 100px;
+} */
+/* .icon{
+
+
+width: 20px;
+margin-right: 10px;
+} */
+/* .produk {
+    width: 25px;
+    margin-right: 6px;
+}
+.transaksi{
+    width: 25px;
+    margin-right: 5px;
+}
+.laporan{
+    width: 25px;
+    margin-right: 10px;
+} */
+
+
+
+
+/* .hover{
+    margin-left
+} */
+/* .bg{
+    background-image: url('logo aldi jaya tani.png');
+    background-color: #198754;
+} */
+ /*#sidebar ul.components{
+    padding: 20px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #44748b;
+}
+#sidebar ul li{
+    margin: 20px;
+    text-decoration: none;
+}
+#sidebar ul p{
+    color: #fff;
+    padding: 10px;
+}
+
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"]{
+    color: #fff;
+    background: #6d7fcc;
+}
+a[data-toggle="collapse"]{
+    position: relative;
+}
+.dropdown-toggle::after{
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translateY(-50%);
+}
+ul ul a{
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+} */
 
 

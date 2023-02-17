@@ -2,17 +2,17 @@
 
 @section('content')
     <div class="container">
-        <h1 class="center"style="align-content: center">Selamat datang di Toko Aldi Jaya Tani</h1>
+        <h1 class="center"style="align-content: center">Dashboard</h1>
         <div class="row">
             <div class="col-xl-4 col-md-6 mb-4 mt-5">
                 <div class="card border-left-primary text-white bg-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-5">
+                            <div class="col mr-5"  style="text-decoration: none">
                                 <h3 class="card-title">Data Produk</h3>
+                                {{-- <a href="produk" style="text-decoration: none; color: white;"><h3 class="card-title">Data Produk</h3></a> --}}
                                 <h6 class="card-text">Sisa Stok : {{ $produk }}</h6>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+    @include('sweetalert::alert')
     @if (session('status'))
         <h6 class="alert alert-success">{{ session('status') }}</h6>
     @endif
@@ -30,8 +31,8 @@
                 <thead>
                     <tr>
                         <th scope="col">Kode Produk Keluar</th>
-                        <th scope="col">Nama_produk</th>
-                        <th scope="col">Satuan_produk</th>
+                        <th scope="col">Nama Produk</th>
+                        <th scope="col">Satuan Produk</th>
                         <th scope="col">Harga Jual</th>
                         <th scope="col">Jumlah Keluar</th>
                         <th scope="col">Tanggal Keluar</th>
@@ -48,11 +49,12 @@
                             <th scope="row">{{ $pk->kode_pk }}</th>
                             <td>{{ $pk->Produk->nama_produk }}</td>
                             <td>{{ $pk->Produk->satuanProduk->satuan_produk }}</td>
-                            <td>Rp.{{ number_format($pk->Produk->harga_jual) }}</td>
+                            <td>Rp.{{ number_format($pk->harga) }}</td>
                             <td>{{ $pk->jumlah_keluar }}</td>
                             <td>{{ date('d F Y', strtotime($pk->tanggal_keluar)) }}</td>
+                            {{-- <td>Rp.{{ number_format($pk->total_harga) }}</td> --}}
                             {{-- <td>{{ $pk->created_at }}</td> --}}
-                            <td>Rp.{{ number_format($pk->Produk->harga_jual * $pk->jumlah_keluar) }}</td>
+                            <td>Rp.{{ number_format($pk->total_harga) }}</td>
                             {{-- <td>Rp.{{ ($pk->harga_jual - $pk->harga_beli) * $pk->jumlah_keluar }}</td> --}}
                             @if (auth()->user()->role == 'pemilikToko')
                                 <td>
@@ -60,7 +62,7 @@
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Anda yakin Ingin Menghapus {{ $pk->nama_produk }}')"><i
+                                            onclick="return confirm('Anda yakin Ingin Menghapus {{ $pk->Produk->nama_produk }}')"><i
                                                 class="bi bi-trash3"></i> Delete</button>
                                     </form>
                                 </td>
@@ -84,7 +86,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h1 class="modal-title">Tambah Produk Keluar</h1>
+                    <h1 class="modal-title">Tambah Data Produk Keluar</h1>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
 

@@ -31,10 +31,10 @@ class laporanMasukController extends Controller
             $produkMasuk = ProdukMasuk::with('Produk')->paginate(5);
         }
 
-        
+        $total = ProdukMasuk::sum('total_harga');
         $produk = Produk::all();
         
-        return view('laporan.laporanMasuk', compact('produk', 'produkMasuk'));
+        return view('laporan.laporanMasuk', compact('produk', 'produkMasuk','total'));
     }
     public function excel()
     {
@@ -46,13 +46,16 @@ class laporanMasukController extends Controller
         $tgl_akhir = $request->tgl_akhir;
 
         if ($tgl_awal and $tgl_akhir) {
+            // $total = ProdukMasuk::sum('total_harga');
             $cetakprodukMasuk = ProdukMasuk::with('Produk')
                 ->whereBetween('tanggal_masuk', [$tgl_awal, $tgl_akhir])
                 ->get();
             // $sum_total = ProdukMasuk::whereBetween('tanggal_masuk', [$tgl_awal, $tgl_akhir])->sum('total');
         } else {
             $cetakprodukMasuk = ProdukMasuk::with('Produk');
+            
         }
+        
         return view('laporan.cetaklaporanMasuk', compact('cetakprodukMasuk','tgl_awal','tgl_akhir'));
 
         // dd(["tanggal awal : ".$tgl_awal, "Tanggal Akhir : ".$tgl_akhir]);

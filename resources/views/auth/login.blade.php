@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="card-img-overlay" style="background-image: url(bg.png)">
+    {{-- <div class="top mt-5">
+        <h1 style="text-align: center">Toko Aldi Jaya Tani</h1>
+    </div>
+     --}}
     <div class="card-body">
-        <div class="container" style="margin-top: 140px ">
+        <div class="container" style="margin-top: 150px ">
             <div class="row justify-content-center">
-                <div class="card text-center" style="width: 38rem;">
+                <div class="card text-center" style="width: 38rem; border-radius: 20px">
+                    
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-                            <h1 style="text-align: center">Login</h1>
+                            <h2 style="text-align: center">Silahkan Login</h2>
                             <div class="row mb-5 mt-5">
                                 <input id="email" type="email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
